@@ -1,0 +1,54 @@
+1、import os
+root_path =os.getcwd()
+offset =len(root_path.split("\\"))
+
+for root,dirs,files in os.walk(root_path):
+	current_dir =root.split("\\")
+	indent =len(current_dir)-offset
+	print("\t"*indent,current_dir[-1])
+	for f in files:
+		print("\t"*(indent+1),f)
+		
+
+2、（统计行数）
+from chardet import detect
+count,blanks=0,0
+with open("b.txt",'rb') as fp:
+	#检测文件编码，编码信息保存为code
+	code=detect(fp.read())['encoding']
+	print(code)
+
+with open("b.txt",'r',encoding=code) as fp:
+	while True:
+		line = fp.readline()
+		if not line:
+			break
+		if len(line.strip())==0:
+			blanks+=1
+		#print(len(line.strip()))
+		count+=1
+print(count,blanks)
+
+
+3、（查看文件路径是否正确）
+from chardet import detect
+from os.path import isfile
+count,blanks=0,0
+with open("b.txt",'rb') as fp:
+	#检测文件编码，编码信息保存为code
+	code=detect(fp.read())['encoding']
+	print(code)
+
+with open("b.txt",'r',encoding=code) as fp:
+	while True:
+		line = fp.readline()
+		if not line:
+			break
+		if len(line.strip())==0:
+			blanks+=1
+		#print(len(line.strip()))
+		count+=1
+print(count,blanks)
+path=r"C:\Users\Administrator\.android\a.txt"
+
+print(isfile(path))
